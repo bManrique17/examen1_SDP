@@ -8,7 +8,7 @@ class TemperatureService{
         
     public:
         TemperatureService(/* args */);
-        int _getTemperatureAt(std::string);
+        int getTemperatureAt(std::string);
         ~TemperatureService();
 };
 

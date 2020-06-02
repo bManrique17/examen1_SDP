@@ -7,7 +7,7 @@ TemperatureService::TemperatureService(/* args */)
 {
 }
 
-int _getTemperatureAt(std::string place){
+int TemperatureService::getTemperatureAt(string place){
     return 25;
 }
 

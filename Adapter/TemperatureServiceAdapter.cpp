@@ -1,7 +1,6 @@
 
 #include "TemperatureServiceAdapter.h"
 
-
 using namespace std;
 
 
@@ -9,8 +8,9 @@ TemperatureServiceAdapter::TemperatureServiceAdapter(/* args */)
 {
 }
 
-int TemperatureServiceAdapter::getTemperatureAt(std::string place, int unit){
-    int temp = _getTemperatureAt(place);
+int TemperatureServiceAdapter::getTemperatureAt(string place, int unit){
+    int temp = TemperatureService::getTemperatureAt(place);
+    //int temp = 0;
     switch (unit){
         case 1:
             return 100;
