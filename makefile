@@ -1,5 +1,5 @@
-run.o:	Login.o Gun.o SMG.o Shotgun.o Rifle.o GunFactory.o YoutubeChannel.o Suscriber.o PCDirector.o GamingPCBuilder.o GamingPC.o Client.o TemperatureService.o TemperatureServiceAdapter.o main.o
-	g++ Login.o Gun.o SMG.o Shotgun.o Rifle.o GunFactory.o YoutubeChannel.o Suscriber.o PCDirector.o GamingPCBuilder.o GamingPC.o Client.o TemperatureService.o TemperatureServiceAdapter.o main.o -o run
+run.o:	Login.o Gun.o SMG.o Shotgun.o Rifle.o GunFactory.o YoutubeChannel.o Suscriber.o PCDirector.o GamingPCBuilder.o GamingPC.o Client.o TemperatureService.o TemperatureServiceAdapter.o File.o ClientAccount.o SoftwareManager.o FreeLicense.o StudentLicense.o PremiunLicense.o main.o
+	g++ Login.o Gun.o SMG.o Shotgun.o Rifle.o GunFactory.o YoutubeChannel.o Suscriber.o PCDirector.o GamingPCBuilder.o GamingPC.o Client.o TemperatureService.o TemperatureServiceAdapter.o File.o ClientAccount.o SoftwareManager.o FreeLicense.o StudentLicense.o PremiunLicense.o main.o -o run
 
 Login.o:	Singleton/Login.h Singleton/Login.cpp
 	g++ -c Singleton/Login.cpp
@@ -42,6 +42,24 @@ TemperatureService.o:	Adapter/TemperatureService.cpp Adapter/TemperatureService.
 
 TemperatureServiceAdapter.o:	Adapter/TemperatureServiceAdapter.cpp Adapter/TemperatureServiceAdapter.h
 	g++ -c Adapter/TemperatureServiceAdapter.cpp
+
+File.o:	State/File.cpp State/File.h
+	g++ -c State/File.cpp
+
+ClientAccount.o:	State/ClientAccount.cpp State/ClientAccount.h
+	g++ -c State/ClientAccount.cpp
+
+SoftwareManager.o:	State/SoftwareManager.cpp State/SoftwareManager.h
+	g++ -c State/SoftwareManager.cpp
+
+FreeLicense.o:	State/FreeLicense.cpp State/FreeLicense.h
+	g++ -c State/FreeLicense.cpp
+
+StudentLicense.o:	State/StudentLicense.cpp State/StudentLicense.h
+	g++ -c State/StudentLicense.cpp
+
+PremiunLicense.o:	State/PremiunLicense.cpp State/PremiunLicense.h
+	g++ -c State/PremiunLicense.cpp
 
 main.o:	main.cpp
 	g++ -c main.cpp

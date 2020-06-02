@@ -19,6 +19,13 @@
 #include "Adapter/Client.h"
 #include "Adapter/TemperatureServiceAdapter.h"
 
+#include "State/ClientAccount.h"
+#include "State/File.h"
+#include "State/PremiunLicense.h"
+#include "State/StudentLicense.h"
+#include "State/FreeLicense.h"
+#include "State/SoftwareManager.h"
+
 using namespace std;
 
 int menu();
@@ -27,7 +34,7 @@ void factory();
 void observer();
 void builder();
 void adapter();
-
+void state();
 
 int main(){
 
@@ -53,6 +60,9 @@ int main(){
             case 5:
                 adapter();
                 break;
+            case 6:
+                state();
+                break;
             default:                
                 break;
         }
@@ -73,6 +83,7 @@ int menu(){
     cout<<"(3) Observer"<<endl;
     cout<<"(4) Builder"<<endl;
     cout<<"(5) Adapter"<<endl;
+    cout<<"(6) State"<<endl;
     cout<<"(0) Salir"<<endl;
     cout<<"->Ingrese su opcion: ";
 
@@ -167,7 +178,7 @@ void observer(){
         cout<<"***Mi Canal***"<<endl;
         cout<<"(1) Agregar video"<<endl;
         cout<<"(2) Ingresar subscriptor"<<endl;
-        cout<<"(3) Eliminar video"<<endl;
+        cout<<"(3) Eliminar subscriptor"<<endl;
         cout<<"(4) Mostrar videos"<<endl;
         cout<<"(0) Menu principal"<<endl;
         cout<<"->Indique su opcion: ";
@@ -192,13 +203,13 @@ void observer(){
                 cout<<"Creado!"<<endl;
                 break;
             case 3:           
-                cout<<"->Ingrese su nombre: ";
+                cout<<"->Ingrese el nombre del subscriptor: ";
                 cin>>suscriber_name;
                 youtubeChannel->removeObserver(new Suscriber(suscriber_name));
                 cout<<"Eliminado!"<<endl;
                 break;
             case 4:           
-                cout<<"     Videos: ";
+                cout<<"     Videos: "<<endl;
                 for (size_t i = 0; i < youtubeChannel->getVideos().size(); i++)
                     cout<<i<<". "<<youtubeChannel->getVideos()[i]<<endl;                                                                
             default:
@@ -299,4 +310,72 @@ void adapter(){
     } while (user_option != 0);
     delete client;
 
+}
+
+void state(){
+    string name;
+    cout<<"*****Editor de archivos*****"<<endl;
+    cout<<"->Ingrese su nombre: ";
+    cin>>name;
+    ClientAccount* client = new ClientAccount(name);
+    cout<<"Tiene una cuenta gratis por los momentos, modifiquela en el siguiente menu"<<endl;
+    int user_option;
+    do{         
+        cout<<"**Bienvenido "<<name<<endl;        
+        cout<<"(1) Guardar archivo"<<endl;
+        cout<<"(2) Subir archivo"<<endl;
+        cout<<"(3) Compartir archivo"<<endl;
+        cout<<"(4) Cambiar licencia"<<endl;        
+        cout<<"(0) Menu principal"<<endl; 
+        cout<<"->Indique su opcion: ";
+
+        cin>>user_option;
+
+        int option;
+        
+
+        switch (user_option){
+            case 1:
+                client->getSoftwareManager()->saveFile(client->getFile());
+                break; 
+            case 2:           
+                client->getSoftwareManager()->uploadFile(client->getFile());
+                break;
+            case 3:           
+                client->getSoftwareManager()->shareFile(client->getFile());
+                break;
+            case 4:           
+                cout<<"(1) Estudiante"<<endl;
+                cout<<"(2) Gratis"<<endl;
+                cout<<"(3) Premiun"<<endl;
+                cout<<"-> Indique su eleccion: ";  
+                cin>>option;
+                switch (option){
+                    case 1:
+                        delete client->getSoftwareManager()->getLicense();
+                        client->getSoftwareManager()->setLicense(new StudentLicense());
+                        cout<<" Actualizado!"<<endl;  
+                        break;
+                    case 2:
+                        delete client->getSoftwareManager()->getLicense();
+                        client->getSoftwareManager()->setLicense(new FreeLicense());
+                        cout<<" Actualizado!"<<endl;  
+                        break;
+                    case 3:
+                        delete client->getSoftwareManager()->getLicense();
+                        client->getSoftwareManager()->setLicense(new PremiunLicense());
+                        cout<<" Actualizado!"<<endl;  
+                        break;
+                    default:
+                        cout<<" Incorrecto"<<endl;  
+                        break;
+                }
+            default:
+                break;
+        }
+        cout<<endl;
+    } while (user_option != 0);
+    
+    delete client;
+    cout<<endl;
 }
