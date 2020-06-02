@@ -50,6 +50,9 @@ int main(){
             case 4:
                 builder();
                 break;
+            case 5:
+                adapter();
+                break;
             default:                
                 break;
         }
@@ -69,6 +72,7 @@ int menu(){
     cout<<"(2) Factory"<<endl;
     cout<<"(3) Observer"<<endl;
     cout<<"(4) Builder"<<endl;
+    cout<<"(5) Adapter"<<endl;
     cout<<"(0) Salir"<<endl;
     cout<<"->Ingrese su opcion: ";
 
